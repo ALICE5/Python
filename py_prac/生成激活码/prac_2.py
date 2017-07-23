@@ -9,7 +9,7 @@ import random,string
 poolOfChar = string.ascii_letters + string.digits
 random_codes = lambda x,y : ''.join([random.choice(x) for i in range(y)])
 
-print(random_codes(poolOfChar,15))
+# print(random_codes(poolOfChar,15))
 
 # 填充空位
 # 主键通常是一个递增的整数序列 若主键值从1增加到1000 那么主键的位数就会从1增加到4
@@ -27,3 +27,22 @@ def pad_zero_to_left(inputNumString, totalLength):
         return '0' * (totalLength - lengthOfInput) + inputNumString
 
 # 拼接
+# 得到了主键和随机序列产生的方法 剩下的问题就是要拼接起来
+# 拼接完成之后 还要保证能够很容易地找到主键的部分
+# 所以在主键和随机串之间加上一个固定的字母 比如A 作为标识符
+# 整个邀请码子串最后一个A之后 就是主键部分
+def invitation_code_generator(quantity, lengOfRandom, lenOfKey):
+    placeHoldChar = "A"
+    for index in range(quantity):
+        tempString = ""
+        try:
+            yield random_codes(poolOfChar,lengOfRandom) + placeHoldChar + pad_zero_to_left(str(index),lenOfKey)
+        except LengthError:
+            print("Index exceeds the length of master key.")
+
+# 生成200个邀请码
+
+i = 1
+for invitationCode in invitation_code_generator(200,15,4):
+    print(str(i)+ ':' + invitationCode)
+    i = i + 1
