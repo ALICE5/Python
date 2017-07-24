@@ -8,6 +8,7 @@ import random,string
 # choice(sequence)可以在一个有序的类型中（list、tuple 或 string）随机选取一个元素
 poolOfChar = string.ascii_letters + string.digits
 random_codes = lambda x,y : ''.join([random.choice(x) for i in range(y)])
+# ''.join(['1','2','3']) => '123'
 
 # print(random_codes(poolOfChar,15))
 
