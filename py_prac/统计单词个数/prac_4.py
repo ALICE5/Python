@@ -23,7 +23,8 @@ def word_statistics(filePath):
                     wordDict[word.lower()] = 1
 
     wordStored = sorted(zip(wordDict.keys(),wordDict.values()))
-    # zip函数用于对多个序列的对应元素进行压缩 x = [1, 2, 3] y = [4, 5, 6] xy = zip(x,y) => [(1, 4), (2, 5), (3, 6)]
+    # zip函数用于对多个序列的对应元素进行压缩
+    # x = [1, 2, 3] y = [4, 5, 6] xy = zip(x,y) => [(1, 4), (2, 5), (3, 6)]
     # sorted函数用于对序列进行排序
 
     for word,count in wordStored:
