@@ -13,8 +13,8 @@ def word_statistics(filePath):
     wordDict = {}
     with open(filePath,'r') as f:
         for line in f:
-            words = re.split('[,."\-\s]\s*',line)
-          #or words = re.split('[,."\-\s]+',line)
+            words = re.split('[,."\-\s]\s*',line)  # 用*表示任意个字符（包括0个） 用+表示至少一个字符
+          # or words = re.split('[,."\-\s]+',line)
             for word in words:
                 if word.lower() in wordDict and word.isalpha():
                 #Python isalpha() 方法检测字符串是否只由字母组成
@@ -23,6 +23,8 @@ def word_statistics(filePath):
                     wordDict[word.lower()] = 1
 
     wordStored = sorted(zip(wordDict.keys(),wordDict.values()))
+    # zip函数用于对多个序列的对应元素进行压缩 x = [1, 2, 3] y = [4, 5, 6] xy = zip(x,y) => [(1, 4), (2, 5), (3, 6)]
+    # sorted函数用于对序列进行排序
 
     for word,count in wordStored:
         print(word,':',count)
