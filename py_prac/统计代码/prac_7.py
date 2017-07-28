@@ -2,39 +2,33 @@
 
 # -*-coding:utf-8-*-
 
-import sys
 import os
 import re
 
-def cal(path):
-    filelist = os.listdir(path)
-    # print filelist
-    filelist = (item for item in filelist if item.endswith(('.py')))
-    ret = [0,0,0]
-    for item in filelist:
-        res = calfile(path,item)
-        for i in (0,1,2):
-            ret[i] += res[i]
-    return tuple(ret)
+def stat_code(dir_path):
+    if not os.path.isdir(dir_path):
+        return
+    exp_re = re.compile(r'^#.*')
+    # 以#开头的0-无限的任意字符
+    file_list = os.listdir(dir_path)
+    print('%s \t %s \t %s \t %s' % ('file','all_lines','space_lines','exp_lines'))
+    for file in file_list:
+        file_path = os.path.join(dir_path,file)
+        if os.path.isfile(file_path) and os.path.splitext(file_path)[1]=='.py':
+            with open(file_path) as f:
+                all_lines = 0
+                space_lines = 0
+                exp_lines =0
+                for line in f.readlines():
+                    all_lines += 1
+                    if line.strip() == '':
+                        space_lines += 1
+                        continue
+                    exp = exp_re.findall(line.strip())
+                    if exp:
+                        exp_lines += 1
+            print('%s \t %s \t %s \t %s' % (file, all_lines, space_lines, exp_lines))
 
-def calfile(path,filename):
-    totLine = 0
-    blankLine = 0
-    commentLine = 0
-    fileObj = open(path + filename,'r')
-    lineList = fileObj.readlines()
-    totLine = len(lineList)
-    for line in lineList:
-        pattern = re.compile(r'(\s*)#')
-        pattern1 = re.compile(r'(\s*)$')
-        if pattern.match(line):
-            commentLine += 1
-        if pattern1.match(line):
-            blankLine += 1
-    fileObj.close()
-    return totLine,blankLine,commentLine
 
-path = sys.argv[1]
-data = cal(path)
-dic = dict(zip(['total line','blank line','comment line'],list(data)))
-print(dic)
+if __name__ == '__main__':
+    stat_code('./code')
