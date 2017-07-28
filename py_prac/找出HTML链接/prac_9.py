@@ -18,3 +18,4 @@ links = soup.find_all('a')
 for link in links:
     print(link['href'])
     # print(link)
+
