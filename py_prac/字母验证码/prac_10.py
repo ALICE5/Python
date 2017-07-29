@@ -1,4 +1,4 @@
-# codeing: utf-8
+#-*- coding: utf-8 -*-
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import string
@@ -9,11 +9,11 @@ def get4char():
     return [random.choice(string.ascii_letters) for _ in range(4)]  # 可以把‘_’换做任意字母，‘_’说明后续不用
 
 
-def getcolor():
+def getColor():
     return random.randint(30, 100), random.randint(30, 100), random.randint(30, 100)
 
 
-def getpicture():
+def getPicture():
     width = 240
     height = 60
 
@@ -23,13 +23,13 @@ def getpicture():
     draw = ImageDraw.Draw(image)
     code = get4char()
     for ch in range(4):
-        draw.text((60 * ch,30), code[ch], font=font, fill=getcolor())
+        draw.text((60 * ch,30), code[ch], font=font, fill=getColor())
 
     for _ in range(random.randint(1500, 3000)):
-        draw.point((random.randint(0, width), random.randint(0, height)), fill=getcolor())
+        draw.point((random.randint(0, width), random.randint(0, height)), fill=getColor())
 
     image = image.filter(ImageFilter.BLUR)
     image.save("".join(code) + '.jpg')
 
 
-getpicture()
+getPicture()
