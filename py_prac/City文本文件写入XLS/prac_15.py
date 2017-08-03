@@ -8,7 +8,8 @@
 # 请将上述内容写到 city.xls 文件中
 
 
-import xlwt,json
+import xlwt
+import json
 
 with open('source/0015/city.txt','r') as f:
     data = json.load(f)
