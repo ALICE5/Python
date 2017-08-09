@@ -3,33 +3,21 @@
 
 # -*- coding:utf-8 -*-
 
-import string
-
-class senseWord():
-    def __init__(self):
-        self.list=[]
-        inputfile=file('filtered_word.txt','r')
-        for lines in inputfile.readlines():
-            self.list.append(lines.decode('utf-8').encode('gbk'))#I've set the file coding type as utf-8
-        inputfile.close()
-        self.list=map(string.strip,self.list);
-        for item in self.list:
-            print(item)
-    def checkWord(self,word):
-        for words in self.list:
-            if words == word:
-                return True
-        return False
-
-if __name__=='__main__':
-    myCheck=senseWord()
-    ipstr=raw_input()
+def trans_to_word():
+    word_filter = set()
+    # set 是一组key的集合 重复元素在set中自动被过滤
+    # add(key) 添加元素到set中 对于重复的元素没有效果 remove(key) 删除元素
+    with open('filtered_words.txt') as f:
+        for word in f.readlines():
+            word_filter.add(word.strip())
     while True:
-        ipstr=raw_input()
-        if ipstr:
-           if(myCheck.checkWord(ipstr)):
-               print('Freedom')
-           else:
-               print('humanRight')
-        else:
+        s = input()
+        if s == 'exit':
             break
+        if s in word_filter:
+            print('Freedom')
+        else:
+            print('Human Rights')
+
+if __name__ == '__main__':
+    trans_to_word()
