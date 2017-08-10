@@ -27,7 +27,7 @@ class senseWord():
 
         return self.word
 
-
+# 测试
 if __name__ == '__main__':
     myCheck = senseWord()
     while True:
