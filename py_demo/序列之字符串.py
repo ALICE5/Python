@@ -67,3 +67,11 @@ else:
     print('It is not title format.')
 print(tempStr.title())
 print('\x65')
+
+# 字符串的maketrans\translate方法
+intab = "aeiou"
+outtab = "12345"
+trantab = str.maketrans(intab, outtab)
+
+str = "this is string example....wow!!!"
+print (str.translate(trantab))
