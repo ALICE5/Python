@@ -32,10 +32,10 @@ for i in range(len(quotesdf)):
 tempdf = quotesdf.copy()
 tempdf['month'] = listtemp
 
-closeMeansKO = tempdf.groupby('month').close.mean()
+# closeMeansKO = tempdf.groupby('month').close.mean()
 # print(closeMeansKO)
-x = closeMeansKO.index
-y = closeMeansKO.values
+# x = closeMeansKO.index
+# y = closeMeansKO.values
 # plt.plot(x,y)
 # plt.plot(x, y,'rD')
 # plt.plot(x, y,'g--')
@@ -82,5 +82,5 @@ import numpy as np
 import pylab as pl
 x = np.linspace(0, 1)
 y = np.sin(4 * np.pi * x) * np.exp(-5 * x)
-pl.plot(x,y)
+pl.plot(x,y,'-.*r')
 pl.show()
